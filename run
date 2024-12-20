@@ -1,0 +1,6 @@
+set -o pipefail
+    timeout 1 _build/dev/rel/eval_repro/bin/eval_repro eval "EvalRepro.main()" 2>&1 | tee -a eval_repro.log
+    rv=$?
+set +o pipefail
+
+exit ${rv}

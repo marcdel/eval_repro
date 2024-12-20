@@ -24,3 +24,9 @@ eval_repro-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+.env
+eval_repro.log
+
+.idea
+*.iml

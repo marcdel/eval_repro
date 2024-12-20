@@ -6,8 +6,19 @@ defmodule EvalRepro.MixProject do
       app: :eval_repro,
       version: "0.1.0",
       elixir: "~> 1.16",
-      start_permanent: Mix.env() == :prod,
-      deps: deps()
+      start_permanent: true,
+      deps: deps(),
+      releases: [
+        eval_repro: [
+          include_executables_for: [:unix],
+          applications: [
+            runtime_tools: :permanent,
+            opentelemetry_exporter: :permanent,
+            opentelemetry: :temporary,
+            eval_repro: :load
+          ]
+        ]
+      ]
     ]
   end
 
@@ -22,8 +33,10 @@ defmodule EvalRepro.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:open_telemetry_decorator, "~> 1.5"},
+      {:opentelemetry, "~> 1.5"},
+      {:opentelemetry_api, "~> 1.4"},
+      {:opentelemetry_exporter, "~> 1.8"},
     ]
   end
 end
